@@ -3,7 +3,9 @@ package com.mangkyu.stream.Quiz4;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Quiz4 {
 
@@ -30,7 +32,10 @@ public class Quiz4 {
     }
 
     public List<Transaction> quiz1() {
-        return Collections.emptyList();
+        return  transactions.stream()
+                .filter(t -> t.getYear() == 2020)
+                .sorted(Comparator.comparing(Transaction::getValue))
+                .collect(Collectors.toList());
     }
 
     public List<String> quiz2() {
