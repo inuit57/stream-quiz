@@ -1,10 +1,8 @@
 package com.mangkyu.stream.Quiz5;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Quiz5 {
 
@@ -23,11 +21,19 @@ public class Quiz5 {
     }
 
     public List<Integer> quiz3() {
-        return Collections.emptyList();
+        return new Random().ints(1, 46)
+                .distinct()
+                .limit(6)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     public List<Integer[]> quiz4() {
-        return Collections.emptyList();
+        return IntStream.rangeClosed(1, 6)
+                .boxed()
+                .flatMap(i -> IntStream.rangeClosed(1, 6).boxed().map(j -> new Integer[]{i, j}))
+                .filter(arr -> arr[0] + arr[1] == 6)
+                .collect(Collectors.toList());
     }
 
 }
