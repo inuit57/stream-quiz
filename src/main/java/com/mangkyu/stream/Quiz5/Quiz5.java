@@ -12,15 +12,14 @@ public class Quiz5 {
 
     public int quiz1() {
         return Arrays.stream(STRING_ARR)
-                .collect(Collectors.joining())
-                .length();
+                .mapToInt(String::length)
+                .sum();
     }
 
     public int quiz2() {
         return Arrays.stream(STRING_ARR)
-                .map(String::length)
-                .reduce(Integer::max)
-                .orElse(-1);
+                .mapToInt(String::length)
+                .max().orElse(0);
     }
 
     public List<Integer> quiz3() {
