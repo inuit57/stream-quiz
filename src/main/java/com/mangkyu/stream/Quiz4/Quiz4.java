@@ -62,15 +62,32 @@ public class Quiz4 {
     }
 
     public boolean quiz5() {
-        return false;
+        return transactions.stream()
+                .map(t->t.getTrader().getCity())
+                .anyMatch(c->c.equals("Busan"));
     }
 
     public List<Integer> quiz6() {
-        return Collections.emptyList();
+
+        return transactions.stream()
+                .filter(t->t.getTrader().getCity().equals("Seoul"))
+                .map(Transaction::getValue)
+                .collect(Collectors.toList());
+
     }
 
     public Integer[] quiz7() {
-        return new Integer[]{0, 0};
+
+        Integer max = transactions.stream()
+                .map(Transaction::getValue)
+                .reduce(Integer::max)
+                .orElse(-1);
+
+        Integer min = transactions.stream()
+                .min(Comparator.comparingInt(Transaction::getValue))
+                .orElseThrow(RuntimeException::new).getValue();
+
+        return new Integer[]{max, min};
     }
 
 }
