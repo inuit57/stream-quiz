@@ -1,10 +1,7 @@
 package com.mangkyu.stream.Quiz4;
 
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Quiz4 {
@@ -39,15 +36,29 @@ public class Quiz4 {
     }
 
     public List<String> quiz2() {
-        return Collections.emptyList();
+
+        return transactions.stream()
+                .map(t -> t.getTrader().getCity())
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     public List<Trader> quiz3() {
-        return Collections.emptyList();
+
+        return transactions.stream()
+                .map(Transaction::getTrader)
+                .distinct()
+                .filter(trader -> trader.getCity() == "Seoul")
+                .sorted(Comparator.comparing(Trader::getName))
+                .collect(Collectors.toList());
     }
 
     public String quiz4() {
-        return null;
+        return transactions.stream()
+                .map(t->t.getTrader().getName())
+                .distinct()
+                .sorted()
+                .collect(Collectors.joining(","));
     }
 
     public boolean quiz5() {
